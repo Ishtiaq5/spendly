@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spendly — Premium Expense &amp; Budget Tracker</title>
+  <meta name="description" content="Spendly is a premium dark-mode expense tracker: log spending in two taps, watch your budget ring fill in real time, and see exactly where your money goes." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="aurora aurora-a" aria-hidden="true"></div>
+  <div class="aurora aurora-b" aria-hidden="true"></div>
+  <div class="grid-lines" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Spendly home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Spendly</span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#tracker">Tracker</a>
+      <a href="#insights">Insights</a>
+      <button id="resetMonth" class="btn btn-ghost btn-sm" type="button">Reset month</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="pill">Personal finance, minus the spreadsheet</p>
+      <h1 id="hero-title">See where your <span class="gradient-text">money actually goes</span>.</h1>
+      <p class="lede">
+        Log an expense in two taps, watch your budget ring fill in real time, and catch the
+        category that is quietly eating your wallet.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#tracker">Add an expense</a>
+        <a class="btn btn-ghost" href="#insights">See insights</a>
+      </div>
+    </section>
+
+    <section id="tracker" class="layout" aria-label="Expense tracker">
+      <article class="card card-ring reveal">
+        <h2 class="card-title">This month</h2>
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 200 200" role="img" aria-label="Percentage of monthly budget used">
+            <defs>
+              <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7c5cff" />
+                <stop offset="50%" stop-color="#22d3ee" />
+                <stop offset="100%" stop-color="#f472b6" />
+              </linearGradient>
+            </defs>
+            <circle class="ring-track" cx="100" cy="100" r="82" />
+            <circle id="ringProgress" class="ring-progress" cx="100" cy="100" r="82" />
+          </svg>
+          <div class="ring-center">
+            <span id="ringPercent" class="ring-percent">0%</span>
+            <span class="ring-label">of budget used</span>
+          </div>
+        </div>
+        <label class="budget-field" for="budgetInput">
+          <span>Monthly budget</span>
+          <input id="budgetInput" type="number" min="1" step="1" inputmode="numeric" value="120000" aria-label="Monthly budget" />
+        </label>
+        <p id="budgetHint" class="hint" aria-live="polite"></p>
+      </article>
+
+      <div class="stats" role="group" aria-label="Monthly summary">
+        <div class="card stat reveal">
+          <p class="stat-label">Spent</p>
+          <p id="statSpent" class="stat-value">Rs 0</p>
+          <p class="stat-note">across this month</p>
+        </div>
+        <div class="card stat reveal">
+          <p class="stat-label">Left</p>
+          <p id="statLeft" class="stat-value">Rs 0</p>
+          <p class="stat-note">still available</p>
+        </div>
+        <div class="card stat reveal">
+          <p class="stat-label">Daily avg</p>
+          <p id="statAvg" class="stat-value">Rs 0</p>
+          <p class="stat-note">per day so far</p>
+        </div>
+        <div class="card stat reveal">
+          <p class="stat-label">Entries</p>
+          <p id="statCount" class="stat-value">0</p>
+          <p class="stat-note">logged items</p>
+        </div>
+      </div>
+
+      <article class="card card-form reveal">
+        <h2 class="card-title">Add expense</h2>
+        <form id="expenseForm" class="form" autocomplete="off">
+          <div class="field">
+            <label for="amount">Amount</label>
+            <input id="amount" name="amount" type="number" min="1" step="1" inputmode="numeric" placeholder="1500" required aria-label="Expense amount" />
+          </div>
+          <div class="field">
+            <label for="category">Category</label>
+            <select id="category" name="category" aria-label="Expense category">
+              <option>Food</option>
+              <option>Transport</option>
+              <option>Bills</option>
+              <option>Shopping</option>
+              <option>Fun</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field field-wide">
+            <label for="note">Note</label>
+            <input id="note" name="note" type="text" maxlength="42" placeholder="Coffee + croissant" aria-label="Expense note" />
+          </div>
+          <button class="btn btn-primary field-wide" type="submit">Add expense</button>
+        </form>
+      </article>
+
+      <article id="insights" class="card card-insights reveal">
+        <h2 class="card-title">Where it goes</h2>
+        <ul id="breakdown" class="breakdown" aria-label="Spending by category"></ul>
+        <p id="emptyState" class="empty">Nothing logged yet — add your first expense to wake this up.</p>
+      </article>
+
+      <article class="card card-list reveal">
+        <h2 class="card-title">Recent</h2>
+        <ul id="expenseList" class="expense-list" aria-label="Recent expenses"></ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Spendly · static demo · your data never leaves this browser</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
